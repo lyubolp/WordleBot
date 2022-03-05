@@ -5,6 +5,7 @@ from typing import List
 Entry = namedtuple('Entry', ['word', 'score'])
 
 
+
 def open_words(path: str) -> List[str]:
     lines = []
 
@@ -36,13 +37,7 @@ def edit_distance(source_word: str, target_word: str) -> int:
 def is_word_possible(entry: Entry, target_word: str) -> bool:
     guess = entry.score
 
-    # A, b
-
-    # A *
-    # A ?
-    # A _
     for i, c in enumerate(guess):
-        # print(i, c)
         if c == '_':
             for j in range(5):
                 if entry.word[i] == target_word[j] and entry.score[j] != '*':
@@ -68,7 +63,7 @@ def get_next_word(entry: Entry, words: List[str]) -> str:
     target_distances = distances[0][1]
 
     possible_results = [distance for distance in distances if distance[1] == target_distances]
-    # print(distances)
+
     if len(possible_results) > 0:
         return possible_results[randint(0, len(possible_results))][0]
     else:
@@ -94,25 +89,4 @@ if __name__ == '__main__':
         next_word = get_next_word(Entry(current_word, result), words)
         print(next_word)
         current_word = next_word
-
-    # entry = Entry('hests', '__**_')
-    #
-    # possible_words = filter_words(entry, words)
-    #
-    # distances = sorted([(word, edit_distance(entry.word, word)) for word in possible_words],
-    #                    key=lambda x: x[1])
-    #
-    # print(distances)
-
-    # entry = Entry('cyano', '___??')
-    #
-    # print(is_word_possible(entry, 'keeno'))
-
-
-
-
-
-
-
-
 
