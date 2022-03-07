@@ -1,3 +1,10 @@
+from collections import namedtuple
+from random import randint
+from typing import List, Optional
+
+Entry = namedtuple('Entry', ['word', 'score'])
+
+
 class WordleBot:
     def __init__(self, words_file_path: str, starter: Optional[str] = None, tries: int = 5):
         self.__words = self.__open_words(words_file_path)
